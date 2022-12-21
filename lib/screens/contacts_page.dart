@@ -10,13 +10,8 @@ class ContactsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          ContactsModel().getAllContacts();
-        },
-      ),
       appBar: AppBar(
-        title: const Text("Contact"),
+        title: const Text("Recently Connected"),
         actions: [
           IconButton(
               onPressed: () {
@@ -26,7 +21,7 @@ class ContactsPage extends StatelessWidget {
           IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert)),
         ],
       ),
-      body: const ContactsList(),
+      body: Container(color: Colors.amber, child: const ContactsList()),
     );
   }
 }
@@ -41,43 +36,24 @@ class ContactsList extends StatelessWidget {
     return FutureBuilder(
         future: model.getContacts(query),
         builder: ((BuildContext context, AsyncSnapshot<List<Profile>> snapshot) {
-          if (snapshot.hasError)
+          if (snapshot.hasError) {
             return const Center(
               child: Text("hata"),
             );
+          }
 
           return snapshot.hasData
               ? ListView(
                   children: [
-                    const ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: Colors.green,
-                        child: Icon(
-                          Icons.group,
-                          color: Colors.white,
-                        ),
-                      ),
-                      title: Text("New group"),
-                    ),
-                    const ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: Colors.green,
-                        child: Icon(
-                          Icons.person_add,
-                          color: Colors.white,
-                        ),
-                      ),
-                      title: Text("New contact"),
-                    ),
                     ...snapshot.data!
                         .map(
                           (profile) => ListTile(
-                            leading: CircleAvatar(
-                              backgroundColor: Colors.green,
-                              backgroundImage: NetworkImage(profile.image),
-                            ),
-                            title: Text(profile.username),
-                          ),
+                              leading: CircleAvatar(
+                                backgroundColor: Colors.green,
+                                backgroundImage: NetworkImage(profile.image),
+                              ),
+                              title: Text(profile.username),
+                              onTap: () => model.startConversation(profile)),
                         )
                         .toList()
                   ],
@@ -91,7 +67,16 @@ class ContactSearchDelegate extends SearchDelegate {
   @override
   ThemeData appBarTheme(BuildContext context) {
     final theme = Theme.of(context);
-    return theme.copyWith(primaryColor: const Color(0xff075e54));
+
+    return theme.copyWith(
+        primaryColor: const Color(0xff075e54),
+        textTheme: TextTheme(
+          titleLarge: TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+          ),
+        ),
+        hintColor: Colors.white70);
   }
 
   @override

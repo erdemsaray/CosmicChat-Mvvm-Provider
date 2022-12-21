@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import '../core/services/locator.dart';
 import '../view_models.dart/sign_in_model.dart';
-import '../whatsapp_main.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
@@ -31,9 +30,6 @@ class SignInPage extends StatelessWidget {
                         ElevatedButton(
                             onPressed: () async {
                               await model.signIn(_textEditingController.text, context);
-                              Navigator.of(context).pushReplacement(MaterialPageRoute(
-                                builder: (context) => const WhatsappMain(),
-                              ));
                             },
                             child: const Text("Sign In"))
                       ],

@@ -7,12 +7,17 @@ import '../../view_models.dart/main_model.dart';
 import '../../view_models.dart/sign_in_model.dart';
 import 'auth_service.dart';
 import 'chat_service.dart';
+import 'navigator_service.dart';
+import 'storage_service.dart';
 
 GetIt getIt = GetIt.instance;
 
 setUpLocators() {
+  getIt.registerLazySingleton(() => NavigatorService());
+
   getIt.registerLazySingleton(() => ChatService());
   getIt.registerLazySingleton(() => AuthService());
+  getIt.registerLazySingleton(() => StorageService());
 
   getIt.registerFactory(() => ChatsModel());
   getIt.registerFactory(() => ConversationModel());
