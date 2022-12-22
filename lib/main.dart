@@ -2,11 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'core/services/firebase_options.dart';
 import 'core/services/locator.dart';
 import 'core/services/navigator_service.dart';
-import 'firebase_options.dart';
-import 'screens/sign_in_page.dart';
-import 'whatsapp_main.dart';
+import 'views/sign_in_page.dart';
+import 'views/whatsapp_main.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
