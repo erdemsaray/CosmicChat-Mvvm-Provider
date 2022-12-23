@@ -24,7 +24,7 @@ class SignInModel extends BaseModel {
           .doc(user?.uid)
           .set({'username': username, 'image': 'https://placekitten.com/200/200'});
 
-      await navigatorService.navigateToReclace(const WhatsappMain());
+      await navigatorService.navigateToReclace(WhatsappMain());
       //hesaptan cıkıs yapmadan yeni hesap olusturdugumuz için :D
       //user id override ediliyor
     } catch (e) {

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../core/services/locator.dart';
-import '../view_models.dart/main_model.dart';
 import 'chats_page.dart';
 import 'contacts_page.dart';
 
 class WhatsappMain extends StatefulWidget {
-  const WhatsappMain({super.key});
+  int initialIndex;
+  WhatsappMain({super.key, this.initialIndex = 0});
 
   @override
   State<WhatsappMain> createState() => _WhatsappMainState();
@@ -14,22 +13,16 @@ class WhatsappMain extends StatefulWidget {
 
 class _WhatsappMainState extends State<WhatsappMain> with SingleTickerProviderStateMixin {
   TabController? _tabController;
-  bool _showMessage = true;
 
   @override
   void initState() {
-    _tabController = TabController(length: 2, vsync: this, initialIndex: 1);
-    _tabController?.addListener(() {
-      _showMessage = _tabController?.index != 1;
-      setState(() {});
-    });
+    _tabController = TabController(length: 2, vsync: this, initialIndex: widget.initialIndex);
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    var model = getIt<MainModel>();
     return Scaffold(
         resizeToAvoidBottomInset: false,
         extendBodyBehindAppBar: true,

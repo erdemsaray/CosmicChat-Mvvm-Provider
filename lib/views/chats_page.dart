@@ -33,50 +33,64 @@ class ChatsPage extends StatelessWidget {
             builder: (BuildContext context, AsyncSnapshot<List<Conversation>> snapshot) {
               return snapshot.hasData
                   ? ListView(
-                      children: snapshot.data!
-                          .map((doc) => ListTile(
-                                leading: CircleAvatar(
-                                  backgroundImage: NetworkImage(doc.profileImage),
-                                ),
-                                title: Text(
-                                  doc.name,
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                                subtitle: Text(
-                                  doc.displayMessage,
-                                  style: const TextStyle(color: Colors.white70),
-                                ),
-                                trailing: Column(
-                                  children: <Widget>[
-                                    const Text("19:30"),
-                                    Container(
-                                      width: 24,
-                                      height: 24,
-                                      margin: const EdgeInsets.only(top: 8),
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle, color: Theme.of(context).colorScheme.primary),
-                                      child: const Center(
-                                        child: Text(
-                                          "16",
-                                          textScaleFactor: 0.8,
-                                          style: TextStyle(color: Colors.white),
+                      children: [
+                        ListTile(
+                          onTap: () => model.goContactPage(),
+                          leading: const CircleAvatar(
+                            backgroundColor: Colors.green,
+                            foregroundColor: Colors.white,
+                            child: Icon(Icons.chat),
+                          ),
+                          title: const Text(
+                            "Start a New Chat",
+                            style: TextStyle(fontWeight: FontWeight.w500, color: Colors.white),
+                          ),
+                        ),
+                        ...snapshot.data!
+                            .map((doc) => ListTile(
+                                  leading: CircleAvatar(
+                                    backgroundImage: NetworkImage(doc.profileImage),
+                                  ),
+                                  title: Text(
+                                    doc.name,
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                  subtitle: Text(
+                                    doc.displayMessage,
+                                    style: const TextStyle(color: Colors.white70),
+                                  ),
+                                  trailing: Column(
+                                    children: <Widget>[
+                                      const Text("19:30"),
+                                      Container(
+                                        width: 24,
+                                        height: 24,
+                                        margin: const EdgeInsets.only(top: 8),
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.circle, color: Theme.of(context).colorScheme.primary),
+                                        child: const Center(
+                                          child: Text(
+                                            "16",
+                                            textScaleFactor: 0.8,
+                                            style: TextStyle(color: Colors.white),
+                                          ),
                                         ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => ConversationPage(
-                                          userId: userId,
-                                          conversation: doc,
-                                        ),
-                                      ));
-                                },
-                              ))
-                          .toList(),
+                                      )
+                                    ],
+                                  ),
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => ConversationPage(
+                                            userId: userId,
+                                            conversation: doc,
+                                          ),
+                                        ));
+                                  },
+                                ))
+                            .toList(),
+                      ],
                     )
                   : const Center(child: CircularProgressIndicator());
             },

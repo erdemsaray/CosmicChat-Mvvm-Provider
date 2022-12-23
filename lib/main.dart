@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
     Widget firstWidget;
 
     if (firebaseUser != null) {
-      firstWidget = const WhatsappMain();
+      firstWidget = WhatsappMain();
     } else {
       firstWidget = const SignInPage();
     }
