@@ -28,13 +28,22 @@ class _ConversationPageState extends State<ConversationPage> {
   late ScrollController _scrollController;
   bool encryptButtonClick = false;
 
+  void onLoad() async {
+    while (_scrollController.positions.isEmpty) {
+      await Future.delayed(const Duration(milliseconds: 100));
+    }
+    _scrollController.animateTo(_scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 350), curve: Curves.decelerate);
+  }
+
   @override
   void initState() {
     _ref = FirebaseFirestore.instance.collection('conversations/${widget.conversation.id}/messages');
     _focusNode = FocusNode();
     _focusNodeKey = FocusNode();
-
     _scrollController = ScrollController();
+
+    onLoad();
     super.initState();
   }
 
@@ -50,79 +59,81 @@ class _ConversationPageState extends State<ConversationPage> {
     var model = getIt<ConversationModel>();
     return ChangeNotifierProvider(
       create: (context) => model,
-      child: Scaffold(
-        extendBodyBehindAppBar: true,
-        appBar: AppBar(
+      child: Container(
+        decoration: const BoxDecoration(
+            image: DecorationImage(image: AssetImage('assets/conservationbackground.jpg'), fit: BoxFit.cover)),
+        child: Scaffold(
           backgroundColor: Colors.transparent,
-          titleSpacing: -5,
-          title: encryptButtonClick
-              ? Padding(
-                  padding: const EdgeInsets.only(left: 150),
-                  child: TextField(
-                    autofocus: true,
-                    focusNode: _focusNodeKey,
-                    controller: _keyController,
-                    obscureText: true,
-                    style: const TextStyle(color: Colors.white),
-                    decoration: const InputDecoration(
-                      hintText: 'Enter a key',
-                      labelStyle: TextStyle(color: Colors.white),
-                      hintStyle: TextStyle(color: Colors.white),
+          extendBodyBehindAppBar: true,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            titleSpacing: -5,
+            title: encryptButtonClick
+                ? Padding(
+                    padding: const EdgeInsets.only(left: 150),
+                    child: TextField(
+                      autofocus: true,
+                      focusNode: _focusNodeKey,
+                      controller: _keyController,
+                      obscureText: true,
+                      style: const TextStyle(color: Colors.white),
+                      decoration: const InputDecoration(
+                        hintText: 'Enter a key',
+                        labelStyle: TextStyle(color: Colors.white),
+                        hintStyle: TextStyle(color: Colors.white),
+                      ),
                     ),
+                  )
+                : Row(
+                    children: <Widget>[
+                      CircleAvatar(
+                        backgroundImage: NetworkImage(widget.conversation.profileImage),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Text(widget.conversation.name),
+                      ),
+                    ],
                   ),
-                )
-              : Row(
-                  children: <Widget>[
-                    CircleAvatar(
-                      backgroundImage: NetworkImage(widget.conversation.profileImage),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: Text(widget.conversation.name),
-                    ),
-                  ],
-                ),
-          actions: <Widget>[
-            const SizedBox(),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: InkWell(
-                  onTap: () {
-                    if (encryptButtonClick) {
-                      encryptKey = _keyController.text;
-                      _keyController.clear();
+            actions: <Widget>[
+              const SizedBox(),
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: InkWell(
+                    onTap: () {
+                      if (encryptButtonClick) {
+                        encryptKey = _keyController.text;
+                        _keyController.clear();
+
+                        setState(() {});
+                      }
+
+                      encryptButtonClick = !encryptButtonClick;
 
                       setState(() {});
-                    }
-
-                    encryptButtonClick = !encryptButtonClick;
-
-                    setState(() {});
-                  },
-                  child: encryptButtonClick
-                      ? const Icon(
-                          Icons.check,
-                          color: Colors.green,
-                        )
-                      : encryptKey.isNotEmpty
-                          ? const Icon(
-                              Icons.enhanced_encryption,
-                              color: Colors.green,
-                            )
-                          : const Icon(
-                              Icons.no_encryption,
-                              color: Colors.white,
-                            )),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: InkWell(onTap: () {}, child: const Icon(Icons.more_vert)),
-            )
-          ],
-        ),
-        body: Container(
-          color: Colors.black,
-          child: Column(
+                    },
+                    child: encryptButtonClick
+                        ? const Icon(
+                            Icons.check,
+                            color: Colors.green,
+                          )
+                        : encryptKey.isNotEmpty
+                            ? const Icon(
+                                Icons.enhanced_encryption,
+                                color: Colors.green,
+                              )
+                            : const Icon(
+                                Icons.no_encryption,
+                                color: Colors.white,
+                              )),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: InkWell(onTap: () {}, child: const Icon(Icons.more_vert)),
+              )
+            ],
+          ),
+          body: Column(
             children: [
               Expanded(
                 child: GestureDetector(
@@ -184,7 +195,8 @@ class _ConversationPageState extends State<ConversationPage> {
                                                               child: Column(
                                                                 children: [
                                                                   Text(
-                                                                    document['message'],
+                                                                    model.decrptText(document['message'], encryptKey,
+                                                                        encryptKey.isNotEmpty),
                                                                     style: const TextStyle(color: Colors.white),
                                                                   ),
                                                                 ],
@@ -227,7 +239,7 @@ class _ConversationPageState extends State<ConversationPage> {
                                 child: TextField(
                                   onTap: () async {
                                     await Future.delayed(const Duration(milliseconds: 300));
-                                    _scrollController.animateTo(_scrollController.position.maxScrollExtent + 40,
+                                    _scrollController.animateTo(_scrollController.position.maxScrollExtent + 200,
                                         duration: const Duration(milliseconds: 200), curve: Curves.easeIn);
                                   },
                                   focusNode: _focusNode,
@@ -260,14 +272,17 @@ class _ConversationPageState extends State<ConversationPage> {
                     ),
                     child: IconButton(
                         onPressed: () async {
-                          await model.add({
-                            'senderId': widget.userId,
-                            'message': _textEditingController.text,
-                            'timeStamp': DateTime.now(),
-                            'media': model.mediaUrl
-                          }, widget.conversation.id);
-                          _scrollController.animateTo(_scrollController.position.maxScrollExtent,
-                              duration: const Duration(milliseconds: 200), curve: Curves.easeIn);
+                          if (_textEditingController.text.isNotEmpty || model.mediaUrl.isNotEmpty) {
+                            await model.add({
+                              'senderId': widget.userId,
+                              'message': _textEditingController.text,
+                              'timeStamp': DateTime.now(),
+                              'media': model.mediaUrl
+                            }, widget.conversation.id, encryptKey, encryptKey.isNotEmpty);
+                            _scrollController.animateTo(_scrollController.position.maxScrollExtent,
+                                duration: const Duration(milliseconds: 200), curve: Curves.easeIn);
+                          }
+
                           _textEditingController.text = '';
                         },
                         icon: const Icon(
