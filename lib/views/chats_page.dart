@@ -35,7 +35,10 @@ class ChatsPage extends StatelessWidget {
                   ? ListView(
                       children: [
                         ListTile(
-                          onTap: () => model.goContactPage(),
+                          onTap: () {
+                            
+                          } //model.goContactPage()
+                          ,
                           leading: const CircleAvatar(
                             backgroundColor: Colors.green,
                             foregroundColor: Colors.white,

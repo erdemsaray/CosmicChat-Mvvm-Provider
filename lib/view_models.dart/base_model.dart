@@ -21,9 +21,9 @@ abstract class BaseModel with ChangeNotifier {
   }
 
   Future<void> signOut(BuildContext context) async {
+    busy = true;
     _authService.signOut(context);
-    Navigator.of(context).pushReplacement(MaterialPageRoute(
-      builder: (context) => const SignInPage(),
-    ));
+    await navigatorService.navigateToReclace(const SignInPage());
+    busy = false;
   }
 }

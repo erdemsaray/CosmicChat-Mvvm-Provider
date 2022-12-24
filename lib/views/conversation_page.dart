@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +18,7 @@ class ConversationPage extends StatefulWidget {
 String encryptKey = '';
 
 class _ConversationPageState extends State<ConversationPage> {
-  late CollectionReference _ref;
+  
   final TextEditingController _textEditingController = TextEditingController();
   final TextEditingController _keyController = TextEditingController();
 
@@ -38,7 +37,7 @@ class _ConversationPageState extends State<ConversationPage> {
 
   @override
   void initState() {
-    _ref = FirebaseFirestore.instance.collection('conversations/${widget.conversation.id}/messages');
+    
     _focusNode = FocusNode();
     _focusNodeKey = FocusNode();
     _scrollController = ScrollController();

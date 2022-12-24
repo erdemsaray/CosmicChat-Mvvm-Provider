@@ -38,4 +38,7 @@ class ContactsModel extends BaseModel {
 
     navigatorService.navigateTo(ConversationPage(userId: user!.uid, conversation: conversation));
   }
+
+
+  
 }
