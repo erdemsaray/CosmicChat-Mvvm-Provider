@@ -39,7 +39,7 @@ class _WhatsappMainState extends State<WhatsappMain> with SingleTickerProviderSt
                 Tab(
                   text: 'Chats',
                 ),
-                Tab(text: 'Contact'),
+                Tab(text: 'Contacts'),
               ],
             ),
           ),

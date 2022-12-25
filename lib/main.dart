@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'core/services/firebase_options.dart';
 import 'core/services/locator.dart';
 import 'core/services/navigator_service.dart';
+import 'view_models.dart/sign_in_model.dart';
 import 'views/sign_in_page.dart';
 import 'views/whatsapp_main.dart';
 
@@ -14,7 +16,11 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   setUpLocators();
-  runApp(MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(
+      create: (context) => SignInModel(),
+    )
+  ], child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

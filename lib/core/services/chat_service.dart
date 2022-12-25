@@ -28,7 +28,7 @@ class ChatService {
   }
 
   Future<List<Profile>> getContacts() async {
-    var ref = _firestore.collection("profile");
+    var ref = _firestore.collection("profile").orderBy('timeStamp', descending: true);
 
     QuerySnapshot documents = await ref.get();
 
@@ -52,7 +52,7 @@ class ChatService {
       documentRef = await ref.add({
         'displayMessage': '',
         'members': [user?.uid, profile.id],
-        'members2' :'sadasd'
+        'members2': 'sadasd'
       });
     } else {
       documentRef = equalConversations.first;

@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 
+import '../core/services/auth_service.dart';
 import '../core/services/chat_service.dart';
 import '../models/conversation.dart';
 import '../views/whatsapp_main.dart';
@@ -7,6 +8,10 @@ import 'base_model.dart';
 
 class ChatsModel extends BaseModel {
   final ChatService _db = GetIt.instance<ChatService>();
+
+  ChatsModel() {
+    updateLastConnectTime();
+  }
 
   Stream<List<Conversation>> conversations(String userId) {
     notifyListeners();
@@ -23,5 +28,9 @@ class ChatsModel extends BaseModel {
     //user id override ediliyor
 
     busy = false;
+  }
+
+  void updateLastConnectTime() {
+    AuthService().updateLastConnectTime();
   }
 }

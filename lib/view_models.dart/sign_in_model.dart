@@ -19,10 +19,11 @@ class SignInModel extends BaseModel {
     var user;
     try {
       user = await _authService.signIn();
-      await _firestore
-          .collection('profile')
-          .doc(user?.uid)
-          .set({'username': username, 'image': 'https://placekitten.com/200/200'});
+      await _firestore.collection('profile').doc(user?.uid).set({
+        'username': username,
+        'image': 'https://placekitten.com/200/200',
+        'timeStamp': DateTime.now(),
+      });
 
       await navigatorService.navigateToReclace(WhatsappMain());
       //hesaptan cıkıs yapmadan yeni hesap olusturdugumuz için :D

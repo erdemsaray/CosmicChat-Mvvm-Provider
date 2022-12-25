@@ -18,7 +18,6 @@ class ConversationPage extends StatefulWidget {
 String encryptKey = '';
 
 class _ConversationPageState extends State<ConversationPage> {
-  
   final TextEditingController _textEditingController = TextEditingController();
   final TextEditingController _keyController = TextEditingController();
 
@@ -37,7 +36,6 @@ class _ConversationPageState extends State<ConversationPage> {
 
   @override
   void initState() {
-    
     _focusNode = FocusNode();
     _focusNodeKey = FocusNode();
     _scrollController = ScrollController();
@@ -60,7 +58,7 @@ class _ConversationPageState extends State<ConversationPage> {
       create: (context) => model,
       child: Container(
         decoration: const BoxDecoration(
-            image: DecorationImage(image: AssetImage('assets/conservationbackground.jpg'), fit: BoxFit.cover)),
+            image: DecorationImage(image: AssetImage('assets/blackbackground.jpg'), fit: BoxFit.cover)),
         child: Scaffold(
           backgroundColor: Colors.transparent,
           extendBodyBehindAppBar: true,
@@ -126,10 +124,6 @@ class _ConversationPageState extends State<ConversationPage> {
                                 color: Colors.white,
                               )),
               ),
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: InkWell(onTap: () {}, child: const Icon(Icons.more_vert)),
-              )
             ],
           ),
           body: Column(
@@ -272,6 +266,7 @@ class _ConversationPageState extends State<ConversationPage> {
                     child: IconButton(
                         onPressed: () async {
                           if (_textEditingController.text.isNotEmpty || model.mediaUrl.isNotEmpty) {
+                            
                             await model.add({
                               'senderId': widget.userId,
                               'message': _textEditingController.text,

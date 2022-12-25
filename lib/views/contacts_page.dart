@@ -5,15 +5,22 @@ import '../models/profile.dart';
 import '../view_models.dart/contacts_model.dart';
 
 String searchText = '';
+TextEditingController controllerSearch = TextEditingController();
 
-class ContactsPage extends StatelessWidget {
+class ContactsPage extends StatefulWidget {
   const ContactsPage({super.key});
 
   @override
+  State<ContactsPage> createState() => _ContactsPageState();
+}
+
+class _ContactsPageState extends State<ContactsPage> {
+  @override
   Widget build(BuildContext context) {
     var model = getIt<ContactsModel>();
-    TextEditingController controllerSearch = TextEditingController();
     FocusNode focusNode = FocusNode();
+
+ 
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -36,7 +43,7 @@ class ContactsPage extends StatelessWidget {
         },
         child: Container(
             decoration: const BoxDecoration(
-                image: DecorationImage(image: AssetImage('assets/darkbackground.jpg'), fit: BoxFit.cover)),
+                image: DecorationImage(image: AssetImage('assets/bluebackground.jpg'), fit: BoxFit.cover)),
             child: Column(
               children: [
                 SafeArea(
@@ -47,7 +54,7 @@ class ContactsPage extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: TextField(
-                          onChanged: (value) => model.updateSearchText(value),
+                          onChanged: (value) => model.updateSearchText(controllerSearch.text),
                           style: const TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
                           focusNode: focusNode,
@@ -75,26 +82,40 @@ class ContactsPage extends StatelessWidget {
   }
 }
 
-class ContactsList extends StatelessWidget {
+String? query;
+
+class ContactsList extends StatefulWidget {
   const ContactsList({Key? key}) : super(key: key);
 
+  @override
+  State<ContactsList> createState() => _ContactsListState();
+}
+
+class _ContactsListState extends State<ContactsList> {
   @override
   Widget build(BuildContext context) {
     var model = getIt<ContactsModel>();
     return FutureBuilder(
         future: model.getContacts(),
-        builder: ((BuildContext context, AsyncSnapshot<List<Profile>> snapshot) {
+        builder: ((BuildContext context, AsyncSnapshot<List<Profile>?> snapshot) {
           if (snapshot.hasError) {
             return const Center(
               child: Text("hata"),
             );
           }
 
+          controllerSearch.addListener(() {
+            query = controllerSearch.text;
+
+            setState(() {});
+          });
+
           return snapshot.hasData
               ? ListView(
                   padding: const EdgeInsets.all(4),
                   children: [
                     ...snapshot.data!
+                        .where((element) => element.username.contains(query ?? ''))
                         .map(
                           (profile) => ListTile(
                               leading: CircleAvatar(
@@ -105,6 +126,18 @@ class ContactsList extends StatelessWidget {
                                 profile.username,
                                 style: const TextStyle(color: Colors.white),
                               ),
+                              trailing: profile.timeStamp
+                                          .toDate()
+                                          .compareTo(DateTime.now().subtract(const Duration(minutes: 30))) ==
+                                      1
+                                  ? const Text(
+                                      "Online",
+                                      style: TextStyle(color: Color.fromARGB(255, 145, 246, 148)),
+                                    )
+                                  : const Text(
+                                      "Offline",
+                                      style: TextStyle(color: Colors.red),
+                                    ),
                               onTap: () => model.startConversation(profile)),
                         )
                         .toList()

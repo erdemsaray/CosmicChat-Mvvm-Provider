@@ -5,14 +5,11 @@ class Profile {
   String id;
   String username;
   String image;
+  Timestamp timeStamp;
 
-  Profile(
-    this.id,
-    this.username,
-    this.image,
-  );
+  Profile(this.id, this.username, this.image, this.timeStamp);
 
   factory Profile.fromSnapshot(DocumentSnapshot snapshot) {
-    return Profile(snapshot.id, snapshot["username"], snapshot["image"]);
+    return Profile(snapshot.id, snapshot["username"], snapshot["image"], snapshot["timeStamp"]);
   }
 }

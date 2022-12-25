@@ -8,15 +8,18 @@ import 'base_model.dart';
 
 class ContactsModel extends BaseModel {
   final ChatService _chatService = getIt<ChatService>();
+  List<Profile>? filteredContacts;
   String searchText = '';
 
   updateSearchText(String newText) {
     searchText = newText;
+    getContacts();
+    notifyListeners();
   }
 
-  Future<List<Profile>> getContacts() async {
+  Future<List<Profile>?> getContacts() async {
     var contacts = await _chatService.getContacts();
-    var filteredContacts = contacts
+    filteredContacts = contacts
         .where((profile) => profile.username.startsWith(searchText))
         .where((profile) => profile.id != user?.uid)
         .toList();
@@ -28,7 +31,6 @@ class ContactsModel extends BaseModel {
   Future<List<Profile>> getAllContacts() async {
     var contacts = await _chatService.getContacts();
 
-    print(contacts[0].username);
     return contacts;
   }
 
@@ -38,7 +40,4 @@ class ContactsModel extends BaseModel {
 
     navigatorService.navigateTo(ConversationPage(userId: user!.uid, conversation: conversation));
   }
-
-
-  
 }

@@ -25,7 +25,7 @@ class ChatsPage extends StatelessWidget {
       ),
       body: Container(
         decoration: const BoxDecoration(
-            image: DecorationImage(image: AssetImage('assets/blackbackground.jpg'), fit: BoxFit.cover)),
+            image: DecorationImage(image: AssetImage('assets/greenbackground.jpg'), fit: BoxFit.cover)),
         child: ChangeNotifierProvider(
           create: (BuildContext context) => model,
           child: StreamBuilder<List<Conversation>>(
@@ -35,10 +35,7 @@ class ChatsPage extends StatelessWidget {
                   ? ListView(
                       children: [
                         ListTile(
-                          onTap: () {
-                            
-                          } //model.goContactPage()
-                          ,
+                          onTap: () => model.goContactPage(),
                           leading: const CircleAvatar(
                             backgroundColor: Colors.green,
                             foregroundColor: Colors.white,
@@ -62,9 +59,12 @@ class ChatsPage extends StatelessWidget {
                                     doc.displayMessage,
                                     style: const TextStyle(color: Colors.white70),
                                   ),
-                                  trailing: Column(
+                                  /*trailing: Column(
                                     children: <Widget>[
-                                      const Text("19:30"),
+                                      const Text(
+                                        "19:30",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
                                       Container(
                                         width: 24,
                                         height: 24,
@@ -80,7 +80,7 @@ class ChatsPage extends StatelessWidget {
                                         ),
                                       )
                                     ],
-                                  ),
+                                  ),*/
                                   onTap: () {
                                     Navigator.push(
                                         context,
