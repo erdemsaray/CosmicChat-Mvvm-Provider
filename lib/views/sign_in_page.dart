@@ -77,7 +77,9 @@ class _SignInPageState extends State<SignInPage> {
 
                                       itemBuilder: (context, index) {
                                         _characterEditController.addListener(() {
-                                          setState(() {});
+                                          if (mounted) {
+                                            setState(() {});
+                                          }
                                         });
                                         return Container(
                                           height: 200,
@@ -156,7 +158,9 @@ class _IngredientWidgetState extends State<IngredientWidget> {
 
           characterList.add(widget.imageLink);
           _characterEditController.text = widget.imageLink;
-          setState(() {});
+          if (mounted) {
+            setState(() {});
+          }
         },
         style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(

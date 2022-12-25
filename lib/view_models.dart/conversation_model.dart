@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../core/services/chat_service.dart';
 import '../core/services/encryption_service.dart';
 import '../core/services/locator.dart';
 import '../core/services/storage_service.dart';
@@ -13,7 +12,6 @@ class ConversationModel extends BaseModel {
   final StorageService _storageService = getIt();
   late CollectionReference _ref;
   String mediaUrl = '';
-  final ChatService _chatService = getIt<ChatService>();
 
   Stream<QuerySnapshot> getConversation(String id) {
     _ref = FirebaseFirestore.instance.collection('conversations/$id/messages');
@@ -22,7 +20,7 @@ class ConversationModel extends BaseModel {
   }
 
   Future<void> updateConservationDisplay(String conservationId, String displayMessage) async {
-    await _chatService.updateConservationDisplay(conservationId, displayMessage);
+    await chatService.updateConservationDisplay(conservationId, displayMessage);
   }
 
   Future<DocumentReference> add(

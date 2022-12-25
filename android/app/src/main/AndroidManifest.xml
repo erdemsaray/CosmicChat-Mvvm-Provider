@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.whatasppclone.erdemsaray">
    <application
-        android:label="whatsappclone"
+        android:label="CosmicChat"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

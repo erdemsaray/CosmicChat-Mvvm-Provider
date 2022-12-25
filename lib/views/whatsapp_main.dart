@@ -24,6 +24,7 @@ class _WhatsappMainState extends State<WhatsappMain> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.black,
         resizeToAvoidBottomInset: false,
         extendBodyBehindAppBar: true,
         bottomNavigationBar: BottomAppBar(

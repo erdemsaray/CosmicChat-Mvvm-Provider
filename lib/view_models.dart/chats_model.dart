@@ -1,21 +1,20 @@
-import 'package:get_it/get_it.dart';
-
 import '../core/services/auth_service.dart';
-import '../core/services/chat_service.dart';
 import '../models/conversation.dart';
+import '../models/profile.dart';
 import '../views/whatsapp_main.dart';
 import 'base_model.dart';
 
 class ChatsModel extends BaseModel {
-  final ChatService _db = GetIt.instance<ChatService>();
+  Profile? filteredContact;
 
   ChatsModel() {
+    getUser();
     updateLastConnectTime();
   }
 
   Stream<List<Conversation>> conversations(String userId) {
     notifyListeners();
-    return _db.getConversations(userId);
+    return chatService.getConversations(userId);
   }
 
   Future<void> goContactPage() async {
@@ -28,6 +27,14 @@ class ChatsModel extends BaseModel {
     //user id override ediliyor
 
     busy = false;
+  }
+
+  Future<Profile?> getUser() async {
+    var contacts = await chatService.getContacts();
+    filteredContact = contacts.where((profile) => profile.id == user?.uid).first;
+
+    notifyListeners();
+    return filteredContact;
   }
 
   void updateLastConnectTime() {

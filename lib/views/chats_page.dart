@@ -17,12 +17,6 @@ class ChatsPage extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: const Text("My Chats"),
-      ),
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(image: AssetImage('assets/greenbackground.jpg'), fit: BoxFit.cover)),
@@ -34,6 +28,24 @@ class ChatsPage extends StatelessWidget {
               return snapshot.hasData
                   ? ListView(
                       children: [
+                        ListTile(
+                          leading: CircleAvatar(
+                            backgroundColor: Colors.red,
+                            backgroundImage: NetworkImage("${model.filteredContact?.image}"),
+                          ),
+                          title: Text(
+                            "Hi ${model.filteredContact?.username}",
+                            style: TextStyle(fontWeight: FontWeight.w500, color: Colors.white),
+                          ),
+                          subtitle: Text(
+                            "Welcome to CosmicChat!",
+                            style: TextStyle(fontWeight: FontWeight.w500, color: Colors.white),
+                          ),
+                        ),
+                        Divider(
+                          thickness: 1,
+                          color: Colors.grey,
+                        ),
                         ListTile(
                           onTap: () => model.goContactPage(),
                           leading: const CircleAvatar(

@@ -43,6 +43,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'WhatApp Clone',
         theme: theme.copyWith(
+          backgroundColor: Colors.black,
           colorScheme: theme.colorScheme.copyWith(primary: Color.fromARGB(255, 63, 140, 65), secondary: Colors.green),
         ),
         home: firstWidget);

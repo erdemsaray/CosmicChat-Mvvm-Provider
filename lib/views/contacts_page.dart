@@ -63,7 +63,7 @@ class _ContactsPageState extends State<ContactsPage> {
                                 borderSide: BorderSide(
                               color: Colors.white,
                             )),
-                            hintText: 'Search a connect...',
+                            hintText: 'Search a contact...',
                             hintStyle: TextStyle(color: Colors.white70),
                             contentPadding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
                           ),

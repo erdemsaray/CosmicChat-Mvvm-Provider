@@ -35,6 +35,8 @@ class ChatService {
     return documents.docs.map((snapshot) => Profile.fromSnapshot(snapshot)).toList();
   }
 
+  
+
   Future<void> updateConservationDisplay(String conservationId, String displayMessage) async {
     var ref = _firestore.collection('conversations').doc(conservationId);
 

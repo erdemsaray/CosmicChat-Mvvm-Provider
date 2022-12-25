@@ -102,12 +102,15 @@ class _ConversationPageState extends State<ConversationPage> {
                         encryptKey = _keyController.text;
                         _keyController.clear();
 
-                        setState(() {});
+                        if (mounted) {
+                          setState(() {});
+                        }
                       }
 
                       encryptButtonClick = !encryptButtonClick;
-
-                      setState(() {});
+                      if (mounted) {
+                        setState(() {});
+                      }
                     },
                     child: encryptButtonClick
                         ? const Icon(
@@ -242,11 +245,14 @@ class _ConversationPageState extends State<ConversationPage> {
                                 ),
                               ),
                               InkWell(
-                                child: const Icon(Icons.attach_file),
+                                child: const Icon(
+                                  Icons.attach_file,
+                                  color: Colors.grey,
+                                ),
                                 onTap: () async => model.uploadMedia(ImageSource.gallery),
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.only(right: 8),
                                 child: InkWell(
                                   child: const Icon(
                                     Icons.camera_alt,
@@ -266,7 +272,6 @@ class _ConversationPageState extends State<ConversationPage> {
                     child: IconButton(
                         onPressed: () async {
                           if (_textEditingController.text.isNotEmpty || model.mediaUrl.isNotEmpty) {
-                            
                             await model.add({
                               'senderId': widget.userId,
                               'message': _textEditingController.text,
