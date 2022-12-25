@@ -7,6 +7,11 @@ class AuthService {
 
   get currentUser => _auth.currentUser;
 
+  Stream<QuerySnapshot> getCharacters() {
+    var ref = _firestore.collection("characters").snapshots();
+    return ref;
+  }
+
   Future<User?> signIn() async {
     var user = await _auth.signInAnonymously();
 

@@ -20,8 +20,6 @@ class _ContactsPageState extends State<ContactsPage> {
     var model = getIt<ContactsModel>();
     FocusNode focusNode = FocusNode();
 
- 
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
@@ -107,7 +105,9 @@ class _ContactsListState extends State<ContactsList> {
           controllerSearch.addListener(() {
             query = controllerSearch.text;
 
-            setState(() {});
+            if (mounted) {
+              setState(() {});
+            }
           });
 
           return snapshot.hasData
@@ -119,7 +119,7 @@ class _ContactsListState extends State<ContactsList> {
                         .map(
                           (profile) => ListTile(
                               leading: CircleAvatar(
-                                backgroundColor: Colors.green,
+                                backgroundColor: Colors.blue,
                                 backgroundImage: NetworkImage(profile.image),
                               ),
                               title: Text(
@@ -128,7 +128,7 @@ class _ContactsListState extends State<ContactsList> {
                               ),
                               trailing: profile.timeStamp
                                           .toDate()
-                                          .compareTo(DateTime.now().subtract(const Duration(minutes: 30))) ==
+                                          .compareTo(DateTime.now().subtract(const Duration(hours: 1))) ==
                                       1
                                   ? const Text(
                                       "Online",

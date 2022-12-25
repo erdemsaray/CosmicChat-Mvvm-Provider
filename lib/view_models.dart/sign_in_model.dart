@@ -13,15 +13,15 @@ class SignInModel extends BaseModel {
 
   get currentUser => _authService.currentUser;
 
-  Future<void> signIn(String username, BuildContext context) async {
-    if (username.isEmpty) return;
+  Future<void> signIn(String username, String imageLink, BuildContext context) async {
+    if (username.isEmpty || imageLink.isEmpty) return;
     busy = true;
     var user;
     try {
       user = await _authService.signIn();
       await _firestore.collection('profile').doc(user?.uid).set({
         'username': username,
-        'image': 'https://placekitten.com/200/200',
+        'image': imageLink,
         'timeStamp': DateTime.now(),
       });
 
@@ -33,5 +33,11 @@ class SignInModel extends BaseModel {
     }
 
     busy = false;
+  }
+
+  Stream<QuerySnapshot> getCharacters() {
+    var ref = _authService.getCharacters();
+
+    return ref;
   }
 }
