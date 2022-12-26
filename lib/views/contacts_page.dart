@@ -138,7 +138,10 @@ class _ContactsListState extends State<ContactsList> {
                                       "Offline",
                                       style: TextStyle(color: Colors.red),
                                     ),
-                              onTap: () => model.startConversation(profile)),
+                              onTap: () async {
+                                Future.delayed(const Duration(milliseconds: 500));
+                                return model.startConversation(profile);
+                              }),
                         )
                         .toList()
                   ],

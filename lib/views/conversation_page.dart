@@ -53,6 +53,7 @@ class _ConversationPageState extends State<ConversationPage> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).copyWith().size.width;
     var model = getIt<ConversationModel>();
     return ChangeNotifierProvider(
       create: (context) => model,
@@ -180,20 +181,25 @@ class _ConversationPageState extends State<ConversationPage> {
                                                       child: Padding(
                                                           padding: const EdgeInsets.all(3),
                                                           child: Container(
+                                                              constraints: BoxConstraints(maxWidth: screenWidth * 0.7),
                                                               padding: const EdgeInsets.symmetric(
                                                                   vertical: 10, horizontal: 10),
                                                               decoration: BoxDecoration(
                                                                 borderRadius: const BorderRadius.horizontal(
                                                                     left: Radius.circular(10),
                                                                     right: Radius.circular(10)),
-                                                                color: Theme.of(context).colorScheme.primary,
+                                                                color: widget.userId == document['senderId']
+                                                                    ? Theme.of(context).colorScheme.primary
+                                                                    : Color.fromARGB(255, 40, 70, 85),
                                                               ),
                                                               child: Column(
                                                                 children: [
-                                                                  Text(
-                                                                    model.decrptText(document['message'], encryptKey,
-                                                                        encryptKey.isNotEmpty),
-                                                                    style: const TextStyle(color: Colors.white),
+                                                                  SizedBox(
+                                                                    child: Text(
+                                                                      model.decrptText(document['message'], encryptKey,
+                                                                          encryptKey.isNotEmpty),
+                                                                      style: const TextStyle(color: Colors.white),
+                                                                    ),
                                                                   ),
                                                                 ],
                                                               ))))),
@@ -233,6 +239,7 @@ class _ConversationPageState extends State<ConversationPage> {
                               ),
                               Expanded(
                                 child: TextField(
+                                  textCapitalization: TextCapitalization.sentences,
                                   onTap: () async {
                                     await Future.delayed(const Duration(milliseconds: 300));
                                     _scrollController.animateTo(_scrollController.position.maxScrollExtent + 200,
