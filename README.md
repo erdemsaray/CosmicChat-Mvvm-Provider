@@ -1,16 +1,27 @@
-# whatsappclone
+# NewsFeedApp
 
-A new Flutter project.
+This Flutter project is an encrypted messaging application that works with Firebase database. Mvvm architecture, Provider and Get-it are used.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<h3 align="left">Screenshots</h3>
+<p align="left"> 
+<a> 
+   <img src="screenshots/1.gif" alt="Screenshot1" height="600em"/> 
+  </a> 
+  <a> 
+   <img src="screenshots/2.gif" alt="Screenshot2" height="600em"/> 
+  </a> 
+  <p align="left"> 
+<a> 
+   <img src="screenshots/3.gif" alt="Screenshot1" height="600em"/> 
+  </a> 
+  <a> 
+   <img src="screenshots/4.gif" alt="Screenshot2" height="600em"/> 
+  </a> 
+  <p align="left"> 
+<a> 
+   <img src="screenshots/5.gif" alt="Screenshot1" height="600em"/> 
+  </a> 
+  <a> 
+   <img src="screenshots/6.gif" alt="Screenshot2" height="600em"/> 
+  </a> 
+  
