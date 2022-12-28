@@ -8,8 +8,8 @@ import 'product/services/firebase_options.dart';
 import 'product/services/locator.dart';
 import 'product/services/navigator_service.dart';
 import 'product/view_models.dart/sign_in_model.dart';
+import 'product/views/homepage.dart';
 import 'product/views/sign_in_page.dart';
-import 'product/views/whatsapp_main.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
     Widget firstWidget;
 
     if (firebaseUser != null) {
-      firstWidget = WhatsappMain();
+      firstWidget = HomePage();
     } else {
       firstWidget = const SignInPage();
     }

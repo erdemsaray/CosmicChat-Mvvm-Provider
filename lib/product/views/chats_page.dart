@@ -35,14 +35,14 @@ class ChatsPage extends StatelessWidget {
                           ),
                           title: Text(
                             "Hi ${model.filteredContact?.username}",
-                            style: TextStyle(fontWeight: FontWeight.w500, color: Colors.white),
+                            style: const TextStyle(fontWeight: FontWeight.w500, color: Colors.white),
                           ),
-                          subtitle: Text(
+                          subtitle: const Text(
                             "Welcome to CosmicChat!",
                             style: TextStyle(fontWeight: FontWeight.w500, color: Colors.white),
                           ),
                         ),
-                        Divider(
+                        const Divider(
                           thickness: 1,
                           color: Colors.grey,
                         ),

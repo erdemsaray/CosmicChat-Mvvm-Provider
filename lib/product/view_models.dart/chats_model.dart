@@ -1,7 +1,7 @@
-import '../services/auth_service.dart';
 import '../models/conversation.dart';
 import '../models/profile.dart';
-import '../views/whatsapp_main.dart';
+import '../services/auth_service.dart';
+import '../views/homepage.dart';
 import 'base_model.dart';
 
 class ChatsModel extends BaseModel {
@@ -20,7 +20,7 @@ class ChatsModel extends BaseModel {
   Future<void> goContactPage() async {
     busy = true;
 
-    await navigatorService.navigateToReclace(WhatsappMain(
+    await navigatorService.navigateToReclace(HomePage(
       initialIndex: 1,
     ));
     //hesaptan cıkıs yapmadan yeni hesap olusturdugumuz için :D

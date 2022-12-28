@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../services/auth_service.dart';
 import '../services/locator.dart';
-import '../views/whatsapp_main.dart';
+import '../views/homepage.dart';
 import 'base_model.dart';
 
 class SignInModel extends BaseModel {
@@ -25,7 +25,7 @@ class SignInModel extends BaseModel {
         'timeStamp': DateTime.now(),
       });
 
-      await navigatorService.navigateToReclace(WhatsappMain());
+      await navigatorService.navigateToReclace(HomePage());
       //hesaptan cıkıs yapmadan yeni hesap olusturdugumuz için :D
       //user id override ediliyor
     } catch (e) {

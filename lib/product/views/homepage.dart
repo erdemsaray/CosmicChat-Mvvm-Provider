@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'chats_page.dart';
 import 'contacts_page.dart';
 
-class WhatsappMain extends StatefulWidget {
+class HomePage extends StatefulWidget {
   int initialIndex;
-  WhatsappMain({super.key, this.initialIndex = 0});
+  HomePage({super.key, this.initialIndex = 0});
 
   @override
-  State<WhatsappMain> createState() => _WhatsappMainState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _WhatsappMainState extends State<WhatsappMain> with SingleTickerProviderStateMixin {
+class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
   TabController? _tabController;
 
   @override
