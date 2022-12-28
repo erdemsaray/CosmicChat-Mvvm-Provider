@@ -1,10 +1,10 @@
 import 'package:get_it/get_it.dart';
 
-import '../../view_models.dart/chats_model.dart';
-import '../../view_models.dart/contacts_model.dart';
-import '../../view_models.dart/conversation_model.dart';
-import '../../view_models.dart/sign_in_model.dart';
-import '../../view_models.dart/whatsapp_main_model.dart';
+import '../view_models.dart/chats_model.dart';
+import '../view_models.dart/contacts_model.dart';
+import '../view_models.dart/conversation_model.dart';
+import '../view_models.dart/sign_in_model.dart';
+import '../view_models.dart/whatsapp_main_model.dart';
 import 'auth_service.dart';
 import 'chat_service.dart';
 import 'navigator_service.dart';

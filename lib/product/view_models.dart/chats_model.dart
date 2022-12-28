@@ -1,4 +1,4 @@
-import '../core/services/auth_service.dart';
+import '../services/auth_service.dart';
 import '../models/conversation.dart';
 import '../models/profile.dart';
 import '../views/whatsapp_main.dart';

@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../core/services/chat_service.dart';
-import '../core/services/locator.dart';
+import '../services/chat_service.dart';
+import '../services/locator.dart';
 import '../models/profile.dart';
 import '../views/conversation_page.dart';
 import 'base_model.dart';

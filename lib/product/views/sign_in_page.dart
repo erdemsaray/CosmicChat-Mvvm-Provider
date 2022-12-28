@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../core/constants/project_variables.dart';
-import '../core/widgets/custom_elevated_button.dart';
+import '../../core/constants/core_variables.dart';
 import '../view_models.dart/sign_in_model.dart';
+import '../widgets/custom_elevated_button.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});

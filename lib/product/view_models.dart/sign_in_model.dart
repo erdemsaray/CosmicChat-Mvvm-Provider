@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../core/services/auth_service.dart';
-import '../core/services/locator.dart';
+import '../services/auth_service.dart';
+import '../services/locator.dart';
 import '../views/whatsapp_main.dart';
 import 'base_model.dart';
 

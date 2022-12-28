@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
-import '../core/services/locator.dart';
+import '../services/locator.dart';
 import '../models/conversation.dart';
 import '../view_models.dart/conversation_model.dart';
 

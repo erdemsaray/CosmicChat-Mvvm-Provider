@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../core/services/locator.dart';
+import '../services/locator.dart';
 import '../models/profile.dart';
 import '../view_models.dart/contacts_model.dart';
 

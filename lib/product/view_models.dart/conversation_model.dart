@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../core/services/encryption_service.dart';
-import '../core/services/locator.dart';
-import '../core/services/storage_service.dart';
+import '../services/encryption_service.dart';
+import '../services/locator.dart';
+import '../services/storage_service.dart';
 import 'base_model.dart';
 
 class ConversationModel extends BaseModel {

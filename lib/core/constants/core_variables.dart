@@ -7,11 +7,10 @@ class ColorItems {
   static const Color googleButtonColor = Color.fromARGB(255, 83, 160, 244);
   static const Color generalTurquaseColor = Color.fromARGB(156, 7, 214, 207);
 
-  //songelisme.com kırmızısı.
 }
 
 class StringItems {
-  //static const String projectName = 'Eats App';
+  //static const String projectName = 'App Name';
 }
 
 class ImageItems {
